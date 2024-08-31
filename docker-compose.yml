@@ -1,17 +1,6 @@
 version: "3.9"
 
 services:
-  php:
-    image: ghcr.io/eventpoints/php:main
-    platform: linux/amd64
-    healthcheck:
-      interval: 10s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-    depends_on:
-      - database
-
   database:
     image: postgres:13
     ports:

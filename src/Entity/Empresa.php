@@ -17,11 +17,11 @@ class Empresa
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'O nome da Empresa não pode ser nulo ou vazio.')]
+    #[Assert\NotBlank(message: 'O nome da Empresa não pode ser nulo ou vazio.', allowNull: false)]
     private ?string $nome = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'O nome fantasia da Empresa não pode ser nulo ou vazio.')]
+    #[Assert\NotBlank(message: 'O nome fantasia da Empresa não pode ser nulo ou vazio.', allowNull: false)]
     private ?string $nomeFantasia = null;
 
     #[ORM\Column(length: 14, unique: true)]
@@ -29,7 +29,7 @@ class Empresa
     private ?string $cnpj = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank(message: 'A razão social da Empresa não pode ser nulo ou vazio.')]
+    #[Assert\NotBlank(message: 'A razão social da Empresa não pode ser nulo ou vazio.', allowNull: false)]
     private ?string $razaoSocial = null;
 
     /**

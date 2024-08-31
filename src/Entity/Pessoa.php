@@ -20,15 +20,14 @@ class Pessoa
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'O nome da pessoa não pode ser vazio ou nulo.')]
+    #[Assert\NotBlank(message: 'O nome da pessoa não pode ser vazio ou nulo.', allowNull: false)]
     private ?string $nome = null;
 
     #[ORM\Column(length: 1)]
-    #[Assert\EqualTo(['M', 'F'], message: 'O sexo da pessoa precisa ser M ou F.')]
+    #[Assert\Choice(choices: ['M', 'F'], message: 'O sexo da pessoa precisa ser M ou F.')]
     private ?string $sexo = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\Date(message: 'A data de nascimento da pessoa precisa estar no formato AAAA-MM-DD.')]
     private ?\DateTimeInterface $dataNascimento = null;
 
     /**
@@ -40,6 +39,7 @@ class Pessoa
 
     #[ORM\Column(length: 11, unique: true)]
     #[Assert\Length(exactly: 11, exactMessage: 'O CPF da pessoa precisa ter 11 dígitos, sem pontuação.')]
+    #[Assert\NotBlank(message: 'O CPF da pessoa não pode ser vazio ou nulo.', allowNull: false)]
     private ?string $cpf = null;
 
     public function __construct() {

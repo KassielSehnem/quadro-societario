@@ -15,10 +15,11 @@ security:
             security: false
         main:
             lazy: true
-            pattern: ^/api
             stateless: true
             provider: app_user_provider
             custom_authenticator: App\Security\ApiTokenAuthenticator
+            json_login:
+                check_path: api_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -28,9 +29,12 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
     access_control:
-        - { path: ^/api, roles: ROLE_USER }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/(login|doc), roles: PUBLIC_ACCESS }
+        - { path: ^/api/, roles: ROLE_USER }
+        - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
     security:

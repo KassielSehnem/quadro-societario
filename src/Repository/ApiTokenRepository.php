@@ -16,6 +16,11 @@ class ApiTokenRepository extends ServiceEntityRepository
         parent::__construct($registry, ApiToken::class);
     }
 
+    public function add(ApiToken $entity) {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
+
     //    /**
     //     * @return ApiToken[] Returns an array of ApiToken objects
     //     */

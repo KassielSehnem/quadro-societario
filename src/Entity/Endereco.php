@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EnderecoRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EnderecoRepository::class)]
 class Endereco
@@ -16,21 +17,31 @@ class Endereco
     private ?int $id = null;
 
     #[ORM\Column(length: 8)]
+    #[Assert\NotBlank(message: 'O CEP não pode ser vazio.')]
+    #[Assert\NotNull(message: 'O CEP não pode ser nulo.')]
+    #[Assert\Length(exactly: 8, exactMessage: 'O CEP precisa ter 8 dígitos, sem pontuação.')]
     private ?string $cep = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'O logradouro não pode ser vazio.')]
+    #[Assert\NotNull(message: 'O logradouro não pode ser nulo.')]
     private ?string $logradouro = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $numero = null;
+    private ?string $numero = 'S/N';
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $complemento = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'A cidade não pode ser vazio.')]
+    #[Assert\NotNull(message: 'A cidade não pode ser nulo.')]
     private ?string $cidade = null;
 
     #[ORM\Column(length: 2)]
+    #[Assert\NotBlank(message: 'A UF não pode ser vazio.')]
+    #[Assert\NotNull(message: 'A UF não pode ser nulo.')]
+    #[Assert\Length(exactly: 2, exactMessage: 'A UF é composta por 2 dígitos.')]
     private ?string $uf = null;
 
     #[ORM\ManyToOne(inversedBy: 'enderecos')]
