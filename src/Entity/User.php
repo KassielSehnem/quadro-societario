@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -21,11 +22,12 @@ class User implements UserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $credential = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\OneToOne(targetEntity: Pessoa::class)]
+    #[JoinColumn(name: 'pessoa_id', referencedColumnName: 'id')]
+    private ?Pessoa $pessoa = null;
 
     #[ORM\Column]
     private bool $active = true;
@@ -33,7 +35,7 @@ class User implements UserInterface
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: TRUE)]
     private ?\DateTimeInterface $updatedAt = null;
 
     /**
@@ -70,15 +72,15 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getName(): ?string
+    public function getPessoa(): ?Pessoa
     {
-        return $this->name;
+        return $this->pessoa;
     }
 
-    public function setName(string $name): static
+    public function setPessoa(Pessoa $pessoa): static
     {
-        $this->name = $name;
-        
+        $this->pessoa = $pessoa;
+
         return $this;
     }
 
