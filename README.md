@@ -1,5 +1,5 @@
-# Case Técnico - Vox Tecnologia
-Repositório com o desafio técnico proposto pela Vox Tecnologia de um quadro societário para a vaga de Desenvolvedor PHP
+# API para Quadro Societário
+Demonstração básica de uma API feita com PHP e Symfony, para ser consumida por qualquer front-end.
 
 ## Como executar
 Para executar o projeto, será necessário seguir alguns pré-requisitos:
