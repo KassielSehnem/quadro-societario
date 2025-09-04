@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: vox_tecnologia
+      POSTGRES_DB: quadro_societario
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: root
     volumes:
